@@ -297,7 +297,10 @@ class FormBuilder
     {
         extract($this->get('label', 'formInline', 'render', 'custom'));
 
-	    $class = '';
+        if (empty($this->getText($label))) return '';
+	    
+    	$class = '';
+
         if($custom){
         	$class = $this->customClass('label');
         } elseif (in_array($render, ['checkbox', 'radio'])){
@@ -313,6 +316,7 @@ class FormBuilder
             'for' => $id,
             'class' => $class
         ], false);
+	   
         return '<label ' . $attrs . '>' . $this->getText($label) . '</label>';
     }
 
